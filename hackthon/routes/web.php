@@ -18,7 +18,62 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/atendente', function () {
+
+
+// atendente
+Route::middleware('atendente')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+//medico
+Route::middleware('atendente')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+//usuario
+Route::middleware('atendente')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ Route::get('/atendente', function () {
     echo "Você é o atendente ";
 })->middleware(['atendente', 'verified']);
 Route::get('/user', function () {
@@ -27,11 +82,6 @@ Route::get('/user', function () {
 Route::get('/medico', function () {
     echo "Você é o medico";
 })->middleware(['medico', 'verified']);
-
-
-
-
-
 
 
 Route::get('/dashboard', function () {
@@ -43,5 +93,4 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-require __DIR__.'/auth.php';
+ */
