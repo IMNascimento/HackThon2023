@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('agenda', function (Blueprint $table) {
+        Schema::create('schedule', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->dateTime('date');
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agenda');
+        Schema::dropIfExists('schedule');
     }
 };

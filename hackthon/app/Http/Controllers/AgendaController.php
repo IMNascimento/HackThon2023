@@ -3,38 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Agenda;
+use App\Models\Consulta;
 
 class AgendaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        //
+        // rota inicial
+        Agenda::get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        // rota de adicionar
+        $result = Agenda::all();
+        return $result;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $requestData = $request->all();
+        
+        Agenda::create($requestData);
     }
 
     /**
@@ -56,7 +49,8 @@ class AgendaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Agenda::findOrFail($id);
+        return view('editAgenda', compact('post'));
     }
 
     /**
@@ -68,7 +62,11 @@ class AgendaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $requestData = $request->all();
+        $post = Agenda::findOrFail($id);
+        $post->update($requestData);
+
+      return redirect('dashboard/Agenda')->with('success', 'Funcionario atualizado!');
     }
 
     /**
@@ -79,6 +77,7 @@ class AgendaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Agenda::destroy($id);
+        return redirect('dashboard/Agenda')->with('success', 'Funcionario deletado!');
     }
 }

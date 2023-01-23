@@ -34,6 +34,8 @@ class AuthenticatedSessionController extends Controller
             return redirect('/atendente/dashboard');
           }elseif(Auth::user()->type == 3) {
             return redirect('/medico/dashboard'); 
+          }elseif(Auth::user()->type == 4){
+            return redirect('/admin/dashboard'); 
           }else{
             return redirect('/');
           }

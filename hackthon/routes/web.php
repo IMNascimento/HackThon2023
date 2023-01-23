@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+//use Date;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,30 +14,51 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/teste', function () {
+    $d = date("Y-m-d H:i:s");
+    echo $d;
+    $timestamp = strtotime($d);
+    echo"<br>". $timestamp;
+    $date = new DateTime();
+    $h = $timestamp+30;
+    $date->setTimestamp($h);
+    echo "<br>". $date->format('Y-m-d H:i:s'); 
 });
 
-
+Route::resource('/agenda', 'App\Http\Controllers\AgendaController');
+Route::resource('/especificacao', 'App\Http\Controllers\AgendaController');
+Route::resource('/consulta', 'App\Http\Controllers\AgendaController');
 
 // atendente
 Route::middleware('atendente')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+   
 });
 //medico
-Route::middleware('atendente')->group(function () {
+Route::middleware('usuario')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 //usuario
-Route::middleware('atendente')->group(function () {
+Route::middleware('medico')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+// admin
+Route::middleware('admin')->group(function () {
+   Route::get('/teste/admin', function(){
+        echo "sou admin";
+   });
+});
+
+
+
+
+
+
 
 require __DIR__.'/auth.php';
 

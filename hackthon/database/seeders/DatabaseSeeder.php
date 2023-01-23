@@ -41,5 +41,18 @@ class DatabaseSeeder extends Seeder
             'password'=> Hash::make('12345678'),
             'type'=> 3,
         ]);
+
+        DB::table('users')->insert([
+            'name'=> 'Tiago',
+            'email' => 'tiago@laravel.com',
+            'password'=> Hash::make('12345678'),
+            'type'=> 4,
+        ]);
+
+        DB::table('specification')->insert([
+            'name'=> 'clinico geral',
+            'user_id' => 3,
+        ]);
+
     }
 }

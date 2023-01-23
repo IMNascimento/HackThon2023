@@ -8,4 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Agenda extends Model
 {
     use HasFactory;
+    protected $table = 'schedule';
+
+    protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'date',
+        'category',
+        'status',
+        'user_id'
+    ];
+
+
+    public function convertTimestamp($date)
+    {
+        return strtotime($date);
+    }
+
 }
