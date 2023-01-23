@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('specification')->insert([
-            'name'=> 'clinico geral',
+            'name'=> 'medico',
             'user_id' => 3,
         ]);
 

@@ -48,6 +48,9 @@ Route::middleware('usuario')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/',[SistemController::class, 'indexUser']);
+    Route::post('/user/agenda/',[SistemController::class, 'agendaUser']);
+    Route::post('/user/marcar/consulta',[SistemController::class, 'consultaUser']);
+    
 });
 //medico
 Route::middleware('medico')->group(function () {

@@ -25,4 +25,7 @@ class Agenda extends Model
         return strtotime($date);
     }
 
+
+
+
 }
