@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SistemController;
+use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\EspecificacaoController;
+use App\Http\Controllers\ConsultaController;
 //use Date;
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +21,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/teste', function () {
     $d = date("Y-m-d H:i:s");
     echo $d;
+    echo "<br>".date('now')."<br>";
+    $i = strtotime(date('now'));
+    echo $i;
     $timestamp = strtotime($d);
     echo"<br>". $timestamp;
     $date = new DateTime();
     $h = $timestamp+30;
     $date->setTimestamp($h);
     echo "<br>". $date->format('Y-m-d H:i:s'); 
+    $date->setTimestamp($i);
+    echo "<br>".$date->format('Y-m-d H:i:s');
 });
 
 Route::resource('/agenda', 'App\Http\Controllers\AgendaController');
@@ -52,6 +61,7 @@ Route::middleware('admin')->group(function () {
    Route::get('/teste/admin', function(){
         echo "sou admin";
    });
+   Route::get('/dashboard', [SistemController::class, 'dashboardAdmin'])->name('dashboard');
 });
 
 
