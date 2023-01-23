@@ -42,13 +42,14 @@ Route::resource('/consulta', 'App\Http\Controllers\AgendaController');
 Route::middleware('atendente')->group(function () {
    
 });
-//medico
+//usuario
 Route::middleware('usuario')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/',[SistemController::class, 'indexUser']);
 });
-//usuario
+//medico
 Route::middleware('medico')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
