@@ -40,32 +40,29 @@ Route::resource('/especificacao', 'App\Http\Controllers\AgendaController');
 
 // atendente
 Route::middleware('atendente')->group(function () {
-   
+    Route::get('/atendente/dashboard',[SistemController::class, 'indexAtendente'])->name('dashboard');
+    Route::post('/atendente/user/consulta',[SistemController::class, 'getUserAtendenteConsulta']);
+    Route::get('/atendente/consulta',[SistemController::class, 'getAtendenteConsulta']);
+    Route::post('/atendente/consulta',[SistemController::class, 'atendenteConsulta']);
+    Route::post('/atendente/marcar/consulta/user',[SistemController::class, 'consultaAtendente']);
 });
 //usuario
 Route::middleware('usuario')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/',[SistemController::class, 'indexUser']);
+    Route::get('/',[SistemController::class, 'indexUser'])->name('dashboard');
     Route::post('/user/agenda/',[SistemController::class, 'agendaUser']);
     Route::post('/user/marcar/consulta',[SistemController::class, 'consultaUser']);
+    
     
 });
 //medico
 Route::middleware('medico')->group(function () {
     Route::resource('/consulta', 'App\Http\Controllers\ConsultaController');
-    Route::get('/consulta/admin', function(){
-        echo "sou medico";
-   });
+    
 });
 
 
 // admin
 Route::middleware('admin')->group(function () {
-   Route::get('/teste/admin', function(){
-        echo "sou admin";
-   });
    Route::get('/dashboard', [SistemController::class, 'dashboardAdmin'])->name('dashboard');
 });
 

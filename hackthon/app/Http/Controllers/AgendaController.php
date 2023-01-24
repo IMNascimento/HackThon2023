@@ -95,58 +95,7 @@ class AgendaController extends Controller
 
 
 
-/*
-    public function agendaNull()
-    {
-        $next_agenda = array(
-            array('date'=> $this->nextDate() . ' 08:00:00'),
-            array('date'=> $this->nextDate() . ' 08:30:00'),
-            array('date'=> $this->nextDate() . ' 09:00:00'),
-            array('date'=> $this->nextDate() . ' 09:30:00'),
-            array('date'=> $this->nextDate() . ' 10:00:00'),
-            array('date'=> $this->nextDate() . ' 10:30:00'),
-            array('date'=> $this->nextDate() . ' 11:00:00'),
-            array('date'=> $this->nextDate() . ' 11:30:00'),
-            array('date'=> $this->nextDate() . ' 12:00:00'),
-            array('date'=> $this->nextDate() . ' 12:30:00'),
-            array('date'=> $this->nextDate() . ' 13:00:00'),
-            array('date'=> $this->nextDate() . ' 13:30:00'),
-            array('date'=> $this->nextDate() . ' 14:00:00'),
-            array('date'=> $this->nextDate() . ' 14:30:00'),
-            array('date'=> $this->nextDate() . ' 15:00:00'),
-            array('date'=> $this->nextDate() . ' 15:30:00'),
-            array('date'=> $this->nextDate() . ' 16:00:00'),
-            array('date'=> $this->nextDate() . ' 16:30:00'),
-            array('date'=> $this->nextDate() . ' 17:00:00'),
-            array('date'=> $this->nextDate() . ' 17:30:00'),
-            array('date'=> $this->nextDate() . ' 18:00:00'),
-        );
-        $agenda= array(
-            array('date'=> date('Y-m-d') . ' 08:00:00'),
-            array('date'=> date('Y-m-d') . ' 08:30:00'),
-            array('date'=> date('Y-m-d') . ' 09:00:00'),
-            array('date'=> date('Y-m-d') . ' 09:30:00'),
-            array('date'=> date('Y-m-d') . ' 10:00:00'),
-            array('date'=> date('Y-m-d') . ' 10:30:00'),
-            array('date'=> date('Y-m-d') . ' 11:00:00'),
-            array('date'=> date('Y-m-d') . ' 11:30:00'),
-            array('date'=> date('Y-m-d') . ' 12:00:00'),
-            array('date'=> date('Y-m-d') . ' 12:30:00'),
-            array('date'=> date('Y-m-d') . ' 13:00:00'),
-            array('date'=> date('Y-m-d') . ' 13:30:00'),
-            array('date'=> date('Y-m-d') . ' 14:00:00'),
-            array('date'=> date('Y-m-d') . ' 14:30:00'),
-            array('date'=> date('Y-m-d') . ' 15:00:00'),
-            array('date'=> date('Y-m-d') . ' 15:30:00'),
-            array('date'=> date('Y-m-d') . ' 16:00:00'),
-            array('date'=> date('Y-m-d') . ' 16:30:00'),
-            array('date'=> date('Y-m-d') . ' 17:00:00'),
-            array('date'=> date('Y-m-d') . ' 17:30:00'),
-            array('date'=> date('Y-m-d') . ' 18:00:00'), 
-        );
-        $return = array($agenda,$next_agenda);
-        return $return;
-    }*/
+
     public function day($date)
     {
         return array(
@@ -180,6 +129,17 @@ class AgendaController extends Controller
         return $data;
     }
 
+    public function getDateAgendaAll(string $date)
+    {
+        $data = Agenda::where('date', 'LIKE', "%$date%")->get();
+        return $data;
+    }
+
+    public function getDateStatus(string $date, string $status)
+    {
+        $data = Agenda::where('date', 'LIKE', "%$date%")->where('status', '=', $status)->get();
+        return $data;
+    }
 
 
 

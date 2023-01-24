@@ -12,7 +12,7 @@
             </thead>
             <tbody>
                 @foreach ($return as $k)
-                            <form action="/consulta" method="post">
+                            <form action="/user/marcar/consulta" method="post">
                                 @csrf
                                 <tr class="table-active">
                                     <td>
@@ -20,7 +20,7 @@
                                     </td>
                                     <td>
                                         @if ($tipo == "1")
-                                            medico
+                                            Médico
                                         @elseif($tipo == "2")
                                             Dentista
                                         @endif

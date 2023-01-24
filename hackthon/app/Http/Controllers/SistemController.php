@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\AgendaController;
+use App\Models\User;
 
 class SistemController extends Controller
 {
@@ -50,7 +51,7 @@ class SistemController extends Controller
             }
             $ch = array_diff($next_day, $re);
         if (count($agenda) < 1) {
-            $return = $d->agendaNull();
+            $return = $d->day($d->nowDate());
             return view('user.consulta',['return'=>$day, 'amanha'=>$next_day, 'tipo'=> $request->tipo]);
         }else {
             return view('user.consulta',['return'=>$check, 'tipo'=> $request->tipo, 'amanha'=>$ch]);
@@ -64,6 +65,64 @@ class SistemController extends Controller
         $db = new AgendaController;
         $db->store($requestData);
         return view('user.index');
+    }
+
+
+    // atendente
+    public function indexAtendente()
+    {
+        $d = new AgendaController;
+        $agenda = $d->getDateStatus($d->nowDate(), 'pendente');
+        return view('atendente.dashboard',['return'=> $agenda]);
+    }
+
+    public function atendenteConsulta(Request $request)
+    {
+        $d = new AgendaController;
+        $day = $d->day($d->nowDate());
+        $agenda = $d->getDateAgendaAll($d->nowDate());
+        $agenda_seguinte = $d->getDateAgendaAll($d->nextDate());
+        $result = array();
+        $tipo = array();
+        foreach ($agenda as $value)
+        {
+            array_push($result, $value->date);
+            array_push($tipo, $value->category);
+        }
+        $check = array_diff($day, $result);
+        $next_day = $d->day($d->nextDate());
+        $re = array();
+        $ti = array();
+        foreach ($agenda_seguinte as $value)
+        {
+            array_push($re, $value->date);
+            array_push($ti, $value->category);
+        }
+        $ch = array_diff($next_day, $re);
+         if (count($agenda) < 1) {
+             $return = $d->day($d->nowDate());
+             return view('atendente.consulta',['return'=>$day, 'amanha'=>$next_day, 'x'=>1, 'user'=>$request->id]);
+         }else {
+             return view('atendente.consulta',['return'=>$check, 'amanha'=>$ch, 'tipo'=>$tipo, 'ti'=>$ti, 'x'=>1,'user'=>$request->id]);
+         }
+    }
+
+    public function getAtendenteConsulta()
+    {
+        return view('atendente.consulta', ['x'=>2]);
+    }
+    public function getUserAtendenteConsulta(Request $request)
+    {
+        $db = User::where('name','LIKE',"%$request->name%")->get();
+        return view('atendente.consulta',['x'=>3, 'db'=>$db]);
+    }
+    public function consultaAtendente(Request $request)
+    {
+        $requestData = $request->all();
+        $requestData['status'] = 'pendente';
+        $db = new AgendaController;
+        $db->store($requestData);
+        return $this->indexAtendente();
     }
 
 }
