@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('title', 'Dashboard')
 @section('content')
-    <x-atendente.navbar/>
+    <x-user.navbar/>
     <!--<input type="datetime-local" name='date'>-->
     <!--fazer com tabela e radios -->
         <table class="table table-dark">
@@ -12,7 +12,7 @@
             </thead>
             <tbody>
                 @foreach ($return as $k)
-                            <form action="/user/marcar/consulta" method="post">
+                            <form action="/consulta" method="post">
                                 @csrf
                                 <tr class="table-active">
                                     <td>

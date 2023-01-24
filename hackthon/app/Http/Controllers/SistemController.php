@@ -18,6 +18,7 @@ class SistemController extends Controller
         return view('admin.dashboard');
     }
 
+    // user 
     public function indexUser()
     {
         return view('user.index');
@@ -36,9 +37,10 @@ class SistemController extends Controller
                 $agenda_seguinte = $d->getDateAgenda($d->nextDate(), 2);
         }
             $result = array();
-            foreach ($agenda as $value) {
+            foreach ($agenda as $value)
+            {
                 array_push($result, $value->date);
-                }
+            }
             $check = array_diff($day, $result);
             $next_day = $d->day($d->nextDate());
             $re = array();
@@ -63,4 +65,5 @@ class SistemController extends Controller
         $db->store($requestData);
         return view('user.index');
     }
+
 }

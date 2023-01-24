@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('title', 'Dashboard')
 @section('content')
-    <x-atendente.navbar/>
+    <x-user.navbar/>
     <!--<input type="datetime-local" name='date'>-->
     <!--fazer com tabela e radios -->
     <div class="container" style="margin-top: 40px;">

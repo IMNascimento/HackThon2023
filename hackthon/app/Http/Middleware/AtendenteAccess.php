@@ -18,7 +18,7 @@ class AtendenteAccess
     public function handle(Request $request, Closure $next)
     {
         //return $next($request);
-        if (Auth::check() AND Auth::user()->type == 3) {
+        if (Auth::check() AND Auth::user()->type == 2) {
             return $next($request);
           }else {
             if (!Auth::check()) {

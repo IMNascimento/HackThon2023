@@ -95,7 +95,7 @@ class AgendaController extends Controller
 
 
 
-
+/*
     public function agendaNull()
     {
         $next_agenda = array(
@@ -146,7 +146,7 @@ class AgendaController extends Controller
         );
         $return = array($agenda,$next_agenda);
         return $return;
-    }
+    }*/
     public function day($date)
     {
         return array(
